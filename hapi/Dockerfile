@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:bookworm
 
 USER node
 
@@ -8,8 +8,9 @@ WORKDIR /home/node/code
 
 # try to save some time by using the lock file durin npm ci
 COPY --chown=node:node package-lock.json package.json ./
-
-RUN npm ci
+# RUN npm install
+# RUN npm update -g npm
+RUN npm clean-install
 
 COPY --chown=node:node . .
 
